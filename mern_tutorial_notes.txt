@@ -1,0 +1,21 @@
+
+IN ROOT (MERN TUTORIAL)
+
+1.npm init 
+	package name: (mern-tutorial)
+	version: (1.0.0)
+	description: Goals
+	entry point: (index.js) server.js
+	test command:
+	git repository:
+	keywords:
+	author: Yaakov Misao
+	license: (ISC) MIT
+2.in root:
+npm i express dotenv mongoose colors  
+npm i -D  nodemon (dev dependency) keep watching jsfiles so we donthave to restart it
+
+.env, gitIgnore all in the Root folder  
+*when adding to .env restart >npm run devStart
+
+
