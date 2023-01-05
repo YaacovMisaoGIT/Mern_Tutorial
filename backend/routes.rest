@@ -1,0 +1,35 @@
+GET http://localhost:5000/api/goals
+ 
+###
+// below GET one
+GET http://localhost:5000/api/goals/1234
+
+###
+
+
+###
+POST http://localhost:5000/api/goals
+Content-Type: application/json
+
+{
+   "text" : "This is a text body"
+     
+}
+
+
+###
+
+DELETE  http://localhost:5000/api/goals/123
+###
+PUT http://localhost:5000/api/goals/321321321321321
+Content-Type: application/json
+
+{
+    "text": "This does not exist"
+ 
+
+}
+
+
+
+

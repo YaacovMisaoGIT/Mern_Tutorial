@@ -1,27 +1,43 @@
-const asyncHandler = require('express-async-handler')
-const mongoose = require('mongoose')
+const asyncHandler = require('express-async-handler')  
+const Goal = require('../models/goalModel')
+
 //desc Get goals
 //route Get /api/goals
 //access Private
 const getGoals = asyncHandler( async (req, res) =>{
-    res.status(200).json({message: "Get Goals"})
+    const goals = await Goal.find()
+    res.status(200).json(goals)
 })
 
 //desc Set goal
 //route POST /api/goals
 //access Private
 const setGoal = asyncHandler( async (req, res) =>{
-    if(!req.body.text) {
+    if(!req.body.text) {  //we search for a text, if there is none we throw an error
         res.status(400).json({message:'Please ass a text field'})
     }
-    res.status(200).json({message: "Set Goal"})
+    //if a text is there, we keep going on
+    const goal = await Goal.create({
+        text: req.body.text
+    })
+    res.status(200).json(goal)
 })
 
 //desc Update goal
 //route PUT /api/goals/:id
 //access Private
 const updateGoal =  asyncHandler(async (req, res) =>{
-    res.status(200).json({message: `Update Goal ${req.params.id}`})
+    const goal = await Goal.findById(req.params.id) //get the goal we are trying to update
+
+    if(!goal) { //if we don not find goal id
+        res.status(400)
+        throw new Error('The requested goal not found')
+    }
+
+    const updatedGoal = await Goal.findByIdAndUpdate(req.params.id, req.body, {
+        new: true, //will just create new data if it doesnot exist
+    })
+    res.status(200).json(updatedGoal)
 })
 
 //desc Delete goal

@@ -18,4 +18,6 @@ npm i -D  nodemon (dev dependency) keep watching jsfiles so we donthave to resta
 .env, gitIgnore all in the Root folder  
 *when adding to .env restart >npm run devStart
 
+3. npm i  express-async-handler  //bcos we do not  want to use async try catch. We only use Error Handler
+
 
