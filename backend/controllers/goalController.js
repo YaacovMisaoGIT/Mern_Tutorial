@@ -1,5 +1,7 @@
 const asyncHandler = require('express-async-handler')  
 const Goal = require('../models/goalModel')
+const User = require('../models/userModel')
+
 
 //desc Get goals
 //route Get /api/goals
@@ -44,7 +46,17 @@ const updateGoal =  asyncHandler(async (req, res) =>{
 //route DELETE /api/goals/:id
 //access Private
 const deleteGoal = asyncHandler( async (req, res) =>{
-    res.status(200).json({message: `Delete Goal ${req.params.id}`})
+    const goal = await Goal.findById(req.params.id) 
+
+    if (!goal) {
+        res.status(400)
+        throw new Error('Goal not found')
+      }
+
+      await goal.remove() //no need to assign variable becos there is no reason to save it
+      
+    res.status(200).json({id: req.params.id})
+    // res.status(200).json({message: `Delete Goal ${req.params.id}`})
 })
 module.exports = {
     getGoals,

@@ -14,6 +14,7 @@ app.use(express.json())  //allows us to use middle ware //body parser for raw js
 app.use(express.urlencoded({ extended: false }))
 
 app.use('/api/goals', require('./routes/goalRoutes'))
+app.use('/api/users', require('./routes/userRoutes'))
 
 app.use(errorHandler)
 

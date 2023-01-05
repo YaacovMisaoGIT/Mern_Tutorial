@@ -12,20 +12,20 @@ POST http://localhost:5000/api/goals
 Content-Type: application/json
 
 {
-   "text" : "This is a text body"
+   "text" : "This is a text body2"
      
 }
 
 
 ###
 
-DELETE  http://localhost:5000/api/goals/123
+DELETE  http://localhost:5000/api/goals/1234
 ###
-PUT http://localhost:5000/api/goals/321321321321321
+PUT http://localhost:5000/api/goals/63b70b0a45fb603dce8bd1ce
 Content-Type: application/json
 
 {
-    "text": "This does not exist"
+    "text": "This does not exist..."
  
 
 }
