@@ -1,5 +1,5 @@
-// const jwt = require('jsonwebtoken')
-// const bcrypt = require('bcryptjs')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 const asyncHandler = require('express-async-handler')
 const User = require('../models/userModel')
 
@@ -8,7 +8,7 @@ const User = require('../models/userModel')
 // @access  Public
 const registerUser = asyncHandler(async (req, res) => {
    // res.json({ message: 'Register User'})
-  const { name, email, password } = req.body
+  const { name, email, password } = req.body //req.body = inpt data
 
   if (!name || !email || !password) {
     res.status(400)
@@ -24,8 +24,8 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 
   // Hash password
-  const salt = await bcrypt.genSalt(10)
-  const hashedPassword = await bcrypt.hash(password, salt)
+  const salt = await bcrypt.genSalt(10) //10= no. of rounds
+  const hashedPassword = await bcrypt.hash(password, salt)//password = plain text, salt=hashed pwd
 
   // Create user
   const user = await User.create({
@@ -35,8 +35,8 @@ const registerUser = asyncHandler(async (req, res) => {
   })
 
   if (user) {
-    res.status(201).json({
-      _id: user.id,
+    res.status(201).json({   //201= ok. smt which is created
+      _id: user.id,          //this will be shown in the display
       name: user.name,
       email: user.email,
       token: generateToken(user._id),
@@ -52,11 +52,12 @@ const registerUser = asyncHandler(async (req, res) => {
 // @access  Public
 const loginUser = asyncHandler(async (req, res) => {
    // res.json({ message: 'Login User'})
-  const { email, password } = req.body
+  const { email, password } = req.body  //get the emial and pwd
 
   // Check for user email
   const user = await User.findOne({ email })
 
+  //Check password //password= plain pwd as login input, user.password= hashed/saved password
   if (user && (await bcrypt.compare(password, user.password))) {
     res.json({
       _id: user.id,
@@ -76,10 +77,17 @@ const loginUser = asyncHandler(async (req, res) => {
 const getMe = asyncHandler(async (req, res) => {
 // res.json({ message: 'User data display'})
 //get the current logged in user becos we'll be sending the token and get the id from the token
-  res.status(200).json(req.user)
+  // res.status(200).json(req.user)
+  const{_id, name, email} = await User.findById(req.user.id) //req.user, what user has authenticated
+
+  res.status(200).json({
+    id: _id,
+    name,
+    email
+  })
 })
 
-// Generate JWT
+// Generate JWT   //id = user id asthe payload
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET, {
     expiresIn: '30d',

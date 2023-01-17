@@ -19,5 +19,19 @@ npm i -D  nodemon (dev dependency) keep watching jsfiles so we donthave to resta
 *when adding to .env restart >npm run devStart
 
 3. npm i  express-async-handler  //bcos we do not  want to use async try catch. We only use Error Handler
+ 4. npm i bcryptjs //to protect passwords in the registration so its gets decrypted in the Database
+ 5. npm i jsonwebtoken   or    npm install jsonwebtoken --save
+ 6. Steps 4 & 5 : bring in to the user controllers
+	 const jwt = require('jsonwebtoken')
+   	 const bcrypt = require('bcryptjs')
+7. In user controller:
+const asyncHandler = require('express-async-handler')
 
+IN Main Folder:
+y1.In main folder  npx create-react-app frontend --template redux   or  npx create-reatc-app@latest frontend --template redux
+2. In Main Folder package.json file :
+		Scripts:
+		"client": "npm start --prefix frontend"  
+  OR,   "start": --do--
+3.In main folder: npm run client
 

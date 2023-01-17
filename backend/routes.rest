@@ -1,25 +1,27 @@
-GET http://localhost:5000/api/goals
+GET http://localhost:5000/api/users/63baf14dd7c5edfe707c29d1
  
 ###
 // below GET one
-GET http://localhost:5000/api/goals/1234
+GET http://localhost:5000/api/users
 
 ###
 
 
 ###
-POST http://localhost:5000/api/goals
+POST http://localhost:5000/api/users
 Content-Type: application/json
 
 {
-   "text" : "This is a text body2"
+   "name" : "This is a text body2",
+   "email": "mmail@gmail.com",
+   "password": "passowrd"
      
 }
 
 
 ###
 
-DELETE  http://localhost:5000/api/goals/1234
+DELETE  http://localhost:5000/api/users/users/63b9cb6e9eb5f52914042a27
 ###
 PUT http://localhost:5000/api/goals/63b70b0a45fb603dce8bd1ce
 Content-Type: application/json
